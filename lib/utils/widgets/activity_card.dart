@@ -1,9 +1,8 @@
-import 'dart:async';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:time_tracker/utils/widgets/activity_category.dart';
+import 'package:time_tracker/utils/widgets/activity_category_component.dart';
 import 'dart:core';
+import 'package:provider/provider.dart';
+import 'package:time_tracker/utils/widgets/card_stopwatch.dart';
 
 class ActivityCard extends StatefulWidget {
   final String categoryName;
@@ -16,29 +15,6 @@ class ActivityCard extends StatefulWidget {
 }
 
 class _ActivityCardState extends State<ActivityCard> {
-  Stopwatch stopwatch = Stopwatch();
-  bool isStarted = false;
-  String timeDisplay = '00:00:00';
-  Timer _everySecond;
-  Color startColor = Colors.green;
-  IconData startIcon = Icons.play_arrow;
-
-  void updateTime() {
-    if (isStarted) {
-      setState(() {
-        timeDisplay = stopwatch.elapsed.inHours.toString().padLeft(2, '0') +
-            ':' +
-            (stopwatch.elapsed.inMinutes % 60).toString().padLeft(2, '0') +
-            ':' +
-            (stopwatch.elapsed.inSeconds % 60).toString().padLeft(2, '0');
-      });
-    }
-  }
-
-  void resetTime() {
-    timeDisplay = '00:00:00';
-  }
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -62,7 +38,7 @@ class _ActivityCardState extends State<ActivityCard> {
                   Row(
                     children: <Widget>[
                       Text(
-                        timeDisplay,
+                        Provider.of<CardStopWatch>(context).time,
                         style: TextStyle(fontSize: 22.0),
                       ),
                       FlatButton(
@@ -78,36 +54,17 @@ class _ActivityCardState extends State<ActivityCard> {
               ),
               SizedBox(
                 width: 36.0,
-                //height: 36.0,
                 child: FlatButton(
                   padding: EdgeInsets.all(0.0),
                   onPressed: () {
-                    setState(() {
-                      if (!isStarted) {
-                        startColor = Colors.red;
-                        startIcon = Icons.stop;
-                        stopwatch.start();
-                        isStarted = true;
-                        _everySecond =
-                            Timer.periodic(Duration(seconds: 1), (timer) {
-                          updateTime();
-                        });
-                      } else {
-                        startColor = Colors.green;
-                        startIcon = Icons.play_arrow;
-                        stopwatch.stop();
-                        stopwatch.reset();
-                        isStarted = false;
-                        _everySecond.cancel();
-                        resetTime();
-                      }
-                    });
+                    Provider.of<CardStopWatch>(context, listen: false)
+                        .startingAction();
                   },
                   shape: CircleBorder(),
-                  color: startColor,
+                  color: Provider.of<CardStopWatch>(context).startColor,
                   child: Container(
                     child: Icon(
-                      startIcon,
+                      Provider.of<CardStopWatch>(context).startIcon,
                       color: Colors.white,
                     ),
                   ),
