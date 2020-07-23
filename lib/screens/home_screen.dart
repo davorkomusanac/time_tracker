@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
             child:
                 ActivityCard(categoryName: 'Sleep', categoryIcon: Icons.hotel),
           ),
-          ActivityCard(categoryName: 'Sleep', categoryIcon: Icons.hotel),
+          // ActivityCard(categoryName: 'Sleep', categoryIcon: Icons.hotel),
         ],
       ),
     ),
