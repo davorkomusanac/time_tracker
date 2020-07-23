@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:time_tracker/utils/constants.dart';
+import 'package:provider/provider.dart';
 import 'package:time_tracker/utils/widgets/activity_card.dart';
-import 'package:time_tracker/utils/widgets/activity_category.dart';
 import 'package:time_tracker/utils/widgets/appbar.dart';
+import 'package:time_tracker/utils/widgets/card_stopwatch.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String id = 'home_screen';
@@ -15,19 +15,17 @@ class HomeScreen extends StatelessWidget {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
-            child:
-                ActivityCard(categoryName: 'Sleep', categoryIcon: Icons.hotel),
+            child: ChangeNotifierProvider(
+              create: (context) => CardStopWatch(),
+              child: ActivityCard(
+                  categoryName: 'Sleep', categoryIcon: Icons.hotel),
+            ),
           ),
-          // ActivityCard(categoryName: 'Sleep', categoryIcon: Icons.hotel),
         ],
       ),
     ),
     Text('THIRD'),
   ];
-
-  void _sendPickedChoice(String value) {
-    //print()
-  }
 
   @override
   Widget build(BuildContext context) {
