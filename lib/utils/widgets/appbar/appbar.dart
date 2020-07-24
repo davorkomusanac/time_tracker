@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:time_tracker/utils/constants.dart';
+import 'popup_menu.dart';
+import 'package:time_tracker/screens/add_activity_screen.dart';
 
-AppBar baseAppBar() {
+AppBar baseAppBar(BuildContext context) {
   return AppBar(
     title: Text('Time Tracker'),
     actions: <Widget>[
@@ -10,7 +11,7 @@ AppBar baseAppBar() {
           Icons.add,
         ),
         onPressed: () {
-          print('Add button was pressed');
+          Navigator.pushNamed(context, AddActivityScreen.id);
         },
       ),
       PopupMenuButton<String>(
