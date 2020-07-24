@@ -12,9 +12,15 @@ class ActivityCategory extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        Icon(icon),
+        Icon(
+          icon,
+          size: 32.0,
+        ),
         Padding(padding: EdgeInsets.only(left: 5.0, right: 5.0)),
-        Text(name),
+        Text(
+          name,
+          style: TextStyle(fontSize: 20.0),
+        ),
       ],
     );
   }

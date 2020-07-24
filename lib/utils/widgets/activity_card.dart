@@ -4,17 +4,12 @@ import 'dart:core';
 import 'package:provider/provider.dart';
 import 'package:time_tracker/utils/widgets/card_stopwatch.dart';
 
-class ActivityCard extends StatefulWidget {
+class ActivityCard extends StatelessWidget {
   final String categoryName;
   final IconData categoryIcon;
 
   ActivityCard({this.categoryName, this.categoryIcon});
 
-  @override
-  _ActivityCardState createState() => _ActivityCardState();
-}
-
-class _ActivityCardState extends State<ActivityCard> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -33,13 +28,12 @@ class _ActivityCardState extends State<ActivityCard> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  ActivityCategory(
-                      name: widget.categoryName, icon: widget.categoryIcon),
+                  ActivityCategory(name: categoryName, icon: categoryIcon),
                   Row(
                     children: <Widget>[
                       Text(
                         Provider.of<CardStopWatch>(context).time,
-                        style: TextStyle(fontSize: 22.0),
+                        style: TextStyle(fontSize: 26.0),
                       ),
                       FlatButton(
                         padding: EdgeInsets.all(0.0),
