@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:time_tracker/utils/widgets/activity_category_component.dart';
+import 'package:time_tracker/utils/constants.dart';
+import 'package:time_tracker/utils/widgets/activity_card/activity_category_component.dart';
 import 'dart:core';
 import 'package:provider/provider.dart';
-import 'package:time_tracker/utils/widgets/card_stopwatch.dart';
+import 'package:time_tracker/utils/widgets/activity_card/card_stopwatch.dart';
 
 class ActivityCard extends StatelessWidget {
   final String categoryName;
@@ -15,7 +16,7 @@ class ActivityCard extends StatelessWidget {
     return SizedBox(
       child: Card(
         elevation: 5.0,
-        color: Color(0xFFe0e0e0),
+        color: kCardColor,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'popup_menu.dart';
 import 'package:time_tracker/screens/add_activity_screen.dart';
 
-AppBar baseAppBar(BuildContext context) {
+AppBar homeScreenAppBar(BuildContext context) {
   return AppBar(
     title: Text('Time Tracker'),
     actions: <Widget>[
