@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 class ActivityCategory extends StatelessWidget {
   final String name;
   final IconData icon;
+  final Color color;
 
-  ActivityCategory({@required this.name, @required this.icon});
+  ActivityCategory(
+      {@required this.name, @required this.icon, @required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +17,7 @@ class ActivityCategory extends StatelessWidget {
         Icon(
           icon,
           size: 32.0,
+          color: color,
         ),
         Padding(padding: EdgeInsets.only(left: 5.0, right: 5.0)),
         Text(
