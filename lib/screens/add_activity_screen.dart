@@ -1,14 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:time_tracker/logic/activities.dart';
 import 'package:time_tracker/utils/widgets/appbar/add_activity_appbar.dart';
 import 'package:time_tracker/utils/constants.dart';
+import 'package:provider/provider.dart';
 
 class AddActivityScreen extends StatelessWidget {
   static const String id = 'add_activity_screen';
 
   @override
   Widget build(BuildContext context) {
+    String newActivityTitle;
+    IconData activityIcon;
+    Color activityColor;
+
     return Scaffold(
-        appBar: addActivityScreenBar(),
+        appBar: AddActivityScreenBar(
+          onSaveCallback: () {
+            Provider.of<Activities>(context, listen: false).addActivity(
+              activityName: newActivityTitle,
+              activityIcon: Icons.access_time,
+              activityColor: Colors.red,
+            );
+            Navigator.pop(context);
+          },
+        ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
@@ -45,7 +60,7 @@ class AddActivityScreen extends StatelessWidget {
                           style: kAddActivityTextStyle,
                           textAlign: TextAlign.center,
                           onChanged: (newText) {
-                            print(newText);
+                            newActivityTitle = newText;
                           },
                         ),
                       ),
