@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 
-class CardStopWatch extends ChangeNotifier {
+class ActivityStopWatch extends ChangeNotifier {
   Stopwatch _stopwatch;
   String _timeDisplay;
   Timer _everySecond;
@@ -9,7 +9,7 @@ class CardStopWatch extends ChangeNotifier {
   Color startColor;
   IconData startIcon;
 
-  CardStopWatch() {
+  ActivityStopWatch() {
     _stopwatch = Stopwatch();
     _timeDisplay = '';
     isStarted = false;
@@ -34,10 +34,10 @@ class CardStopWatch extends ChangeNotifier {
   }
 
   void startingAction() {
-    !isStarted ? startTiming() : stopTiming();
+    !isStarted ? _startTiming() : _stopTiming();
   }
 
-  void startTiming() {
+  void _startTiming() {
     _timeDisplay = '00:00:00';
     _setIconStatus();
     isStarted = true;
@@ -45,7 +45,7 @@ class CardStopWatch extends ChangeNotifier {
     updateTime();
   }
 
-  void stopTiming() {
+  void _stopTiming() {
     _setIconStatus();
     isStarted = false;
     _stopwatch.stop();

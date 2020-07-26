@@ -17,7 +17,7 @@ class ActivityCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<CardStopWatch>(
+    return Consumer<ActivityStopWatch>(
       builder: (context, stopWatch, child) {
         return SizedBox(
           child: Card(
