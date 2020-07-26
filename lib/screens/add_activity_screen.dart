@@ -38,7 +38,9 @@ class AddActivityScreen extends StatelessWidget {
                           decoration: InputDecoration(
                             isDense: true,
                             contentPadding: EdgeInsets.symmetric(
-                                horizontal: 30.0, vertical: 5.0),
+                              horizontal: 30.0,
+                              vertical: 5.0,
+                            ),
                           ),
                           style: kAddActivityTextStyle,
                           textAlign: TextAlign.center,

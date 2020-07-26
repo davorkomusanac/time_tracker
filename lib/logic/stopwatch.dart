@@ -11,7 +11,7 @@ class CardStopWatch extends ChangeNotifier {
 
   CardStopWatch() {
     _stopwatch = Stopwatch();
-    _timeDisplay = '00:00:00';
+    _timeDisplay = '';
     isStarted = false;
     startColor = Colors.green;
     startIcon = Icons.play_arrow;
@@ -29,26 +29,27 @@ class CardStopWatch extends ChangeNotifier {
   }
 
   void resetTime() {
-    _timeDisplay = '00:00:00';
+    _timeDisplay = '';
     notifyListeners();
   }
 
   void startingAction() {
-    !isStarted ? _startTiming() : _stopTiming();
+    !isStarted ? startTiming() : stopTiming();
   }
 
-  void _startTiming() {
+  void startTiming() {
+    _timeDisplay = '00:00:00';
     _setIconStatus();
-    _stopwatch.start();
     isStarted = true;
+    _stopwatch.start();
     updateTime();
   }
 
-  void _stopTiming() {
+  void stopTiming() {
     _setIconStatus();
+    isStarted = false;
     _stopwatch.stop();
     _stopwatch.reset();
-    isStarted = false;
     _everySecond.cancel();
     resetTime();
   }

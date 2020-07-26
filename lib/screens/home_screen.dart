@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:time_tracker/utils/widgets/activity_card/activity_card.dart';
 import 'package:time_tracker/utils/widgets/appbar/home_screen_appbar.dart';
-import 'package:time_tracker/utils/widgets/activity_card/card_stopwatch.dart';
+import 'package:time_tracker/logic/stopwatch.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String id = 'home_screen';
@@ -13,12 +13,37 @@ class HomeScreen extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
-            child: ChangeNotifierProvider(
-              create: (context) => CardStopWatch(),
+          ChangeNotifierProvider(
+            create: (context) => CardStopWatch(),
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
               child: ActivityCard(
-                  categoryName: 'Sleep', categoryIcon: Icons.hotel),
+                categoryName: 'Sleep',
+                categoryIcon: Icons.hotel,
+                categoryColor: Colors.blue,
+              ),
+            ),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => CardStopWatch(),
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: ActivityCard(
+                categoryName: 'Eating',
+                categoryIcon: Icons.event_seat,
+                categoryColor: Colors.blue,
+              ),
+            ),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => CardStopWatch(),
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 8.0),
+              child: ActivityCard(
+                categoryName: 'Work',
+                categoryIcon: Icons.email,
+                categoryColor: Colors.blue,
+              ),
             ),
           ),
         ],
