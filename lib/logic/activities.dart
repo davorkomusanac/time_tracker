@@ -17,10 +17,11 @@ class Activities extends ChangeNotifier {
   }
 
   void _addActivityWithStopWatch(ActivityCard activity) {
+    var stopWatch = ActivityStopWatch();
     var pad = Padding(
       padding: const EdgeInsets.all(4.0),
-      child: ChangeNotifierProvider(
-        create: (context) => ActivityStopWatch(),
+      child: ChangeNotifierProvider.value(
+        value: stopWatch,
         child: activity,
       ),
     );
