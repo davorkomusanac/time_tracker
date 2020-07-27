@@ -12,8 +12,12 @@ class HomeScreen extends StatelessWidget {
       padding: const EdgeInsets.all(4.0),
       child: Consumer<Activities>(
         builder: (context, activitiesData, child) {
-          return Column(
-            children: activitiesData.activities,
+          return ListView.builder(
+            itemBuilder: (context, index) {
+              final activity = activitiesData.activities[index];
+              return activity;
+            },
+            itemCount: activitiesData.activities.length,
           );
         },
       ),
