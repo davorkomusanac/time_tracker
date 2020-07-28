@@ -3,7 +3,6 @@ import 'package:flutter_material_color_picker/flutter_material_color_picker.dart
 
 class ColorPicker extends ChangeNotifier {
   ColorSwatch _mainColor = Colors.blue;
-  Function colorChangeCallback;
   BuildContext context;
 
   ColorPicker(this.context);
@@ -45,7 +44,3 @@ class ColorPicker extends ChangeNotifier {
     return _mainColor;
   }
 }
-
-//colorChangeCallback
-
-//(color) => setState(() => _tempMainColor = color)

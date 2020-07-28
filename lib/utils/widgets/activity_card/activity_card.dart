@@ -10,10 +10,12 @@ class ActivityCard extends StatelessWidget {
   final IconData categoryIcon;
   final Color categoryColor;
 
-  ActivityCard(
-      {@required this.categoryName,
+  const ActivityCard(
+      {Key key,
+      @required this.categoryName,
       @required this.categoryIcon,
-      @required this.categoryColor});
+      @required this.categoryColor})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
