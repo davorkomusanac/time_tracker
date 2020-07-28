@@ -4,6 +4,7 @@ import 'package:time_tracker/utils/widgets/appbar/add_activity_appbar.dart';
 import 'package:time_tracker/utils/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:time_tracker/utils/widgets/color_picker.dart';
+import 'package:time_tracker/utils/widgets/icon_picker.dart';
 
 class AddActivityScreen extends StatelessWidget {
   static const String id = 'add_activity_screen';
@@ -20,7 +21,7 @@ class AddActivityScreen extends StatelessWidget {
             if (newActivityTitle != null && newActivityTitle.isNotEmpty) {
               Provider.of<Activities>(context, listen: false).addActivity(
                 activityName: newActivityTitle.trim(),
-                activityIcon: Icons.access_time,
+                activityIcon: activityIcon,
                 activityColor: activityColor,
               );
               Navigator.pop(context);
@@ -30,12 +31,7 @@ class AddActivityScreen extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-            decoration: BoxDecoration(
-                color: kCardColor,
-                borderRadius: BorderRadius.circular(10.0),
-                boxShadow: [
-                  BoxShadow(blurRadius: 4.0),
-                ]),
+            decoration: kAddActivityBoxDecoration,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
@@ -53,13 +49,7 @@ class AddActivityScreen extends StatelessWidget {
                       Expanded(
                         flex: 2,
                         child: TextField(
-                          decoration: InputDecoration(
-                            isDense: true,
-                            contentPadding: EdgeInsets.symmetric(
-                              horizontal: 30.0,
-                              vertical: 5.0,
-                            ),
-                          ),
+                          decoration: kAddActivityInputDecoration,
                           style: kAddActivityTextStyle,
                           textAlign: TextAlign.center,
                           onChanged: (newText) {
@@ -70,26 +60,33 @@ class AddActivityScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Text(
-                          'Icon',
-                          style: kAddActivityTextStyle,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: InkWell(
-                            onTap: () => print('icon button'),
-                            child: Icon(
-                              Icons.access_time,
-                              size: 36.0,
+                ChangeNotifierProvider(
+                  create: (context) => IconPicker(context),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            'Icon',
+                            style: kAddActivityTextStyle,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Consumer<IconPicker>(
+                              builder: (context, iconPicker, child) {
+                                return InkWell(
+                                  onTap: () => iconPicker.pickIcon(),
+                                  child: Icon(
+                                    activityIcon = iconPicker.getIconData,
+                                    size: 36.0,
+                                  ),
+                                );
+                              },
                             ),
                           ),
-                        ),
-                      ]),
+                        ]),
+                  ),
                 ),
                 ChangeNotifierProvider(
                   create: (context) => ColorPicker(context),
