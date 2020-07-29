@@ -11,6 +11,7 @@ class ActivityCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
@@ -20,9 +21,13 @@ class ActivityCategory extends StatelessWidget {
           color: color,
         ),
         Padding(padding: EdgeInsets.only(left: 5.0, right: 5.0)),
-        Text(
-          name,
-          style: TextStyle(fontSize: 20.0),
+        Flexible(
+          fit: FlexFit.loose,
+          child: Text(
+            name,
+            style: TextStyle(fontSize: 18.0),
+            overflow: TextOverflow.fade,
+          ),
         ),
       ],
     );

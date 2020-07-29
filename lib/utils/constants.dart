@@ -26,3 +26,8 @@ const kAddActivityInputDecoration = InputDecoration(
     vertical: 5.0,
   ),
 );
+
+const kTimePeriodTextStyle = TextStyle(
+  color: Colors.grey,
+  fontSize: 14.0,
+);

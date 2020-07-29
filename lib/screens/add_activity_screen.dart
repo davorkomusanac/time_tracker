@@ -52,6 +52,7 @@ class AddActivityScreen extends StatelessWidget {
                           decoration: kAddActivityInputDecoration,
                           style: kAddActivityTextStyle,
                           textAlign: TextAlign.center,
+                          maxLength: 15,
                           onChanged: (newText) {
                             newActivityTitle = newText;
                           },

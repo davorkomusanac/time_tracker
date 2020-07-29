@@ -37,9 +37,9 @@ AppBar homeScreenAppBar(BuildContext context) {
             Tab(
               icon: Icon(Icons.timer),
             ),
-            Tab(
-              icon: Icon(Icons.insert_chart),
-            ),
+//            Tab(
+//              icon: Icon(Icons.insert_chart),
+//            ),
           ],
         ),
       ),
