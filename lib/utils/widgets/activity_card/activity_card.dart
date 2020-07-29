@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:time_tracker/logic/activities_history.dart';
 import 'package:time_tracker/utils/constants.dart';
 import 'package:time_tracker/utils/widgets/activity_card/activity_category_component.dart';
 import 'dart:core';
 import 'package:provider/provider.dart';
 import 'package:time_tracker/logic/stopwatch.dart';
+import 'package:time_tracker/utils/widgets/activity_tracker.dart';
 
 class ActivityCard extends StatelessWidget {
   final String categoryName;
@@ -48,12 +50,15 @@ class ActivityCard extends StatelessWidget {
                             stopWatch.time,
                             style: TextStyle(fontSize: 26.0),
                           ),
-                          FlatButton(
-                            padding: EdgeInsets.all(0.0),
-                            child: Icon(Icons.menu),
-                            onPressed: () {
-                              print('Edit activity button was pressed');
-                            },
+                          SizedBox(
+                            width: 36.0,
+                            child: FlatButton(
+                              padding: EdgeInsets.all(0.0),
+                              child: Icon(Icons.more_vert),
+                              onPressed: () {
+                                print('Edit activity button was pressed');
+                              },
+                            ),
                           ),
                         ],
                       ),
@@ -64,7 +69,25 @@ class ActivityCard extends StatelessWidget {
                     child: FlatButton(
                       padding: EdgeInsets.all(0.0),
                       onPressed: () {
-                        stopWatch.startingAction();
+                        if (!stopWatch.isStarted) {
+                          stopWatch.startTiming();
+                        } else {
+                          stopWatch.stopTiming();
+                          Provider.of<ActivitiesHistory>(context, listen: false)
+                              .addActivitySession(
+                            ActivityTracker(
+                              activity: ActivityCategory(
+                                  name: categoryName,
+                                  icon: categoryIcon,
+                                  color: categoryColor),
+                              startingTime: stopWatch.getStartingTime(),
+                              endingTime: stopWatch.getEndingTime(),
+                              length: stopWatch.getLength(),
+                            ),
+                          );
+                        }
+                        // stopWatch.startingAction();
+                        // Provider.of<Activities>(context, listen: false)
                       },
                       shape: CircleBorder(),
                       color: stopWatch.startColor,

@@ -8,6 +8,9 @@ class ActivityStopWatch extends ChangeNotifier {
   bool isStarted;
   Color startColor;
   IconData startIcon;
+  DateTime startingTime;
+  DateTime endingTime;
+  String length;
 
   ActivityStopWatch() {
     _stopwatch = Stopwatch();
@@ -18,6 +21,7 @@ class ActivityStopWatch extends ChangeNotifier {
   }
 
   void updateTime() {
+    startingTime = DateTime.now();
     _everySecond = Timer.periodic(Duration(seconds: 1), (timer) {
       _timeDisplay = _stopwatch.elapsed.inHours.toString().padLeft(2, '0') +
           ':' +
@@ -29,15 +33,16 @@ class ActivityStopWatch extends ChangeNotifier {
   }
 
   void resetTime() {
+    endingTime = DateTime.now();
     _timeDisplay = '';
     notifyListeners();
   }
 
   void startingAction() {
-    !isStarted ? _startTiming() : _stopTiming();
+    !isStarted ? startTiming() : stopTiming();
   }
 
-  void _startTiming() {
+  void startTiming() {
     _timeDisplay = '00:00:00';
     _setIconStatus();
     isStarted = true;
@@ -45,10 +50,11 @@ class ActivityStopWatch extends ChangeNotifier {
     updateTime();
   }
 
-  void _stopTiming() {
+  void stopTiming() {
     _setIconStatus();
     isStarted = false;
     _stopwatch.stop();
+    setLength();
     _stopwatch.reset();
     _everySecond.cancel();
     resetTime();
@@ -65,7 +71,30 @@ class ActivityStopWatch extends ChangeNotifier {
     notifyListeners();
   }
 
+  void setLength() {
+    if (_stopwatch.elapsed.inSeconds < 60) {
+      length = '${_stopwatch.elapsed.inSeconds}s';
+    } else if (_stopwatch.elapsed.inMinutes < 60) {
+      length = '${_stopwatch.elapsed.inMinutes}m';
+    } else {
+      length =
+          '${_stopwatch.elapsed.inHours}h${(_stopwatch.elapsed.inMinutes % 60).toString().padLeft(2, '0')}m';
+    }
+  }
+
   String get time {
     return _timeDisplay;
+  }
+
+  String getLength() {
+    return length;
+  }
+
+  DateTime getStartingTime() {
+    return startingTime;
+  }
+
+  DateTime getEndingTime() {
+    return endingTime;
   }
 }
